@@ -51,9 +51,6 @@ services:
   backend-proxy:
     image: nginx:alpine
     container_name: webserver
-    # tty: true
-    # ports:
-    #   - "8080:8080"
     volumes:
       - ./backend:/var/www
       - ./nginx/backend/conf.d/:/etc/nginx/conf.d/
@@ -66,15 +63,13 @@ services:
     container_name: db
     restart: unless-stopped
     tty: true
-    ports:
-      - "3306:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE?Not set}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD?Not set}
       SERVICE_TAGS: ${SERVICE_TAGS?Not set}
       SERVICE_NAME: ${SERVICE_NAME?Not set}
     volumes:
-      # - dbdata:/var/lib/mysql/
+      - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
