@@ -1,0 +1,3 @@
+#! /bin/bash
+
+docker-compose exec backend /var/www/artisan $1

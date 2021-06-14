@@ -1,8 +1,18 @@
 #!/bin/bash
 
-# Install compose dependencies
+##################
+#### Backend Setup
+##################
+
+# Install composer dependencies
 docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
 
 
-# start the app
-docker-compose up
+# Create an environment file if it does not exist yet
+if [ ! -f "$(pwd)/backend/.env" ]; then
+  echo "Creating first time environment file"
+  cp "$(pwd)/backend/.env.example" "$(pwd)/backend/.env"
+fi
+
+# Start the app
+docker-compose up $1

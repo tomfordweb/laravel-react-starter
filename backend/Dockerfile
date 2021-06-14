@@ -12,9 +12,6 @@ RUN mkdir -p /var/www/html
 # Set Profile
 RUN chown laravel:laravel /var/www/html
 
-# Work in the specific space
-WORKDIR /var/www/html
-
 # Install dependencies
 RUN apk add --no-cache \
     freetype \
@@ -39,3 +36,4 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN apk add --no-cache $PHPIZE_DEPS \
 	&& pecl install xdebug-2.9.7 \
 	&& docker-php-ext-enable xdebug
+
