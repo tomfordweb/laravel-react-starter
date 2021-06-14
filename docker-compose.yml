@@ -83,8 +83,6 @@ services:
   backend-proxy:
     image: nginx:alpine
     container_name: webserver
-    ports:
-      - 8080:8080
     volumes:
       - ./backend:/var/www
       - ./nginx/backend/conf.d/:/etc/nginx/conf.d/
