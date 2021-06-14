@@ -1,5 +1,7 @@
 # Local Development
 
+View the app at `http://localhost`
+
 ### First time setup
 
 The app will complain that you did not set an encryption key.

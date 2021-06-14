@@ -5,8 +5,13 @@
 ##################
 
 # Install composer dependencies
-docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
 
+if [ ! -d "$(pwd)/backend/vendor" ]; then
+  echo "Performing composer update..."
+  docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
+else
+  echo "Vendor directory already exists, skipping composer update"
+fi
 
 # Create an environment file if it does not exist yet
 if [ ! -f "$(pwd)/backend/.env" ]; then

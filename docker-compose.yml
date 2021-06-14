@@ -19,6 +19,8 @@ services:
     build:
       context: ./frontend
     entrypoint: npm start
+    volumes:
+      - ./frontend:/app
     ports:
       - 3000:3000
     networks:
