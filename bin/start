@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Install compose dependencies
+docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
+
+
+# start the app
+docker-compose up
