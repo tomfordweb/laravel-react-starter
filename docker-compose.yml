@@ -55,6 +55,13 @@ services:
       - ./nginx/backend/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE?Not set}
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD?Not set}
 
   #MySQL Service
   db:
@@ -65,10 +72,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: your_mysql_root_password
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      MYSQL_DATABASE: ${MYSQL_DATABASE?Not set}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD?Not set}
+      SERVICE_TAGS: ${SERVICE_TAGS?Not set}
+      SERVICE_NAME: ${SERVICE_NAME?Not set}
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
