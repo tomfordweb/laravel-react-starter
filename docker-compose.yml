@@ -34,8 +34,12 @@ services:
     container_name: backend
     tty: true
     environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE?Not set}
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD?Not set}
     working_dir: /var/www
     volumes:
       - ./backend:/var/www
@@ -55,13 +59,6 @@ services:
       - ./nginx/backend/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
-    environment:
-      DB_CONNECTION: mysql
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      DB_DATABASE: ${MYSQL_DATABASE?Not set}
-      DB_USERNAME: root
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD?Not set}
 
   #MySQL Service
   db:
@@ -77,7 +74,7 @@ services:
       SERVICE_TAGS: ${SERVICE_TAGS?Not set}
       SERVICE_NAME: ${SERVICE_NAME?Not set}
     volumes:
-      - dbdata:/var/lib/mysql/
+      # - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
