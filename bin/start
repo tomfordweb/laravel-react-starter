@@ -5,7 +5,7 @@
 ##################
 
 # Install composer dependencies
-docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
+# docker run --rm --interactive --tty --volume $(pwd)/backend:/app composer update
 
 
 # Create an environment file if it does not exist yet

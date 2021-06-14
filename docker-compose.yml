@@ -19,6 +19,8 @@ services:
     build:
       context: ./frontend
     entrypoint: npm start
+    volumes:
+      - ./frontend:/app
     ports:
       - 3000:3000
     networks:
@@ -81,6 +83,8 @@ services:
   backend-proxy:
     image: nginx:alpine
     container_name: webserver
+    ports:
+      - 8080:8080
     volumes:
       - ./backend:/var/www
       - ./nginx/backend/conf.d/:/etc/nginx/conf.d/
